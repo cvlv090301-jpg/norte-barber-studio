@@ -216,7 +216,7 @@ function Servicios() {
           necesites por WhatsApp.
         </p>
 
-        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-3 sm:grid-cols-2">
           {site.services.map((s) => (
             <div
               key={s.name}
@@ -313,7 +313,7 @@ function Promocion() {
           <a href="#contacto" className={`${primaryBtn} mt-6`}>
             {site.promo.cta}
           </a>
-          <p className="mt-4 text-xs text-foreground/45">{site.promo.note}</p>
+          {site.promo.note ? <p className="mt-4 text-xs text-foreground/45">{site.promo.note}</p> : null}
         </div>
       </div>
     </section>
@@ -344,11 +344,6 @@ function Ubicacion() {
             </h3>
             <p className="mt-1 text-sm text-foreground/60">{site.addressLine}</p>
             <p className="text-sm text-foreground/60">{site.addressCity}</p>
-            {site.demoMode ? (
-              <p className="mt-2 text-xs text-foreground/40">
-                Ubicación de referencia para demostración.
-              </p>
-            ) : null}
 
             <div className="mt-5">
               <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.2em] text-foreground/40">
