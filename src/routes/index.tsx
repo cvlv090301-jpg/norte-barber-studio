@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 import heroImg from "../assets/hero.jpg";
@@ -51,6 +52,7 @@ export const Route = createFileRoute("/")({
           priceRange: "$$",
           address: {
             "@type": "PostalAddress",
+            streetAddress: "Av. Universidad 1200, Col. Anáhuac",
             addressLocality: "San Nicolás de los Garza",
             addressRegion: "Nuevo León",
             addressCountry: "MX",
@@ -163,7 +165,7 @@ function Hero() {
         <h1 className="gold-text max-w-[14ch] font-display text-6xl leading-[0.86] sm:text-8xl">
           {site.tagline}
         </h1>
-        <p className="mt-5 max-w-[46ch] text-sm leading-relaxed text-foreground/65 sm:text-base">
+        <p className="mt-5 max-w-[46ch] text-base leading-relaxed text-foreground/70 sm:text-lg">
           {site.heroSubtitle}
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -179,6 +181,9 @@ function Hero() {
             Ver servicios
           </a>
         </div>
+        <p className="mt-8 text-[11px] font-medium uppercase tracking-[0.3em] text-accent/70">
+          {site.heroKicker}
+        </p>
       </div>
     </section>
   );
@@ -190,9 +195,11 @@ function Presentacion() {
       <div className="mx-auto max-w-6xl px-5">
         <Eyebrow>La barbería</Eyebrow>
         <SectionHeading>Hecha para el detalle</SectionHeading>
-        <p className="mt-6 max-w-[60ch] text-base leading-relaxed text-foreground/70">
-          {site.presentation}
-        </p>
+        {site.presentation.map((p) => (
+          <p key={p.slice(0, 20)} className="mt-6 max-w-[60ch] text-base leading-relaxed text-foreground/70">
+            {p}
+          </p>
+        ))}
       </div>
     </section>
   );
@@ -209,7 +216,7 @@ function Servicios() {
           necesites por WhatsApp.
         </p>
 
-        <div className="mt-10 grid gap-3 sm:grid-cols-2">
+        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {site.services.map((s) => (
             <div
               key={s.name}
@@ -243,7 +250,7 @@ function Beneficios() {
       <div className="mx-auto max-w-6xl px-5">
         <Eyebrow>Por qué elegirnos</Eyebrow>
         <SectionHeading>Por qué Norte</SectionHeading>
-        <div className="mt-10 grid gap-3 sm:grid-cols-3">
+        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {site.benefits.map((b, i) => (
             <div
               key={b.title}
@@ -271,8 +278,7 @@ function Galeria() {
         <Eyebrow>Galería</Eyebrow>
         <SectionHeading>El espacio</SectionHeading>
         <p className="mt-4 max-w-[52ch] text-sm text-foreground/50">
-          Muestras de ambiente — sustitúyelas con tus fotos reales del local y
-          de tus trabajos.
+          Cortes, barba y un espacio pensado para que disfrutes cada visita.
         </p>
 
         <div className="mt-10 grid grid-cols-2 gap-2 sm:gap-3">
@@ -300,13 +306,14 @@ function Promocion() {
     <section className="border-t border-white/5 py-20">
       <div className="mx-auto max-w-6xl px-5">
         <div className="rounded-2xl border border-accent/30 bg-accent/10 p-8 sm:p-10">
-          <Eyebrow>Promoción actual</Eyebrow>
-          <h3 className="font-display text-4xl tracking-wide text-foreground">
+          <Eyebrow>{site.promo.eyebrow}</Eyebrow>
+          <h3 className="font-display text-4xl leading-none tracking-wide text-foreground sm:text-5xl">
             {site.promo.title}
           </h3>
-          <p className="mt-3 max-w-[50ch] text-sm text-foreground/70">
-            {site.promo.description}
-          </p>
+          <a href="#contacto" className={`${primaryBtn} mt-6`}>
+            {site.promo.cta}
+          </a>
+          <p className="mt-4 text-xs text-foreground/45">{site.promo.note}</p>
         </div>
       </div>
     </section>
@@ -337,6 +344,11 @@ function Ubicacion() {
             </h3>
             <p className="mt-1 text-sm text-foreground/60">{site.addressLine}</p>
             <p className="text-sm text-foreground/60">{site.addressCity}</p>
+            {site.demoMode ? (
+              <p className="mt-2 text-xs text-foreground/40">
+                Ubicación de referencia para demostración.
+              </p>
+            ) : null}
 
             <div className="mt-5">
               <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.2em] text-foreground/40">
@@ -371,6 +383,7 @@ function Ubicacion() {
 }
 
 function Contacto() {
+  const [demoNotice, setDemoNotice] = useState(false);
   const wa = whatsappLink();
   const booking = site.bookingUrl || wa;
   const isExternal = booking.startsWith("http");
@@ -383,22 +396,33 @@ function Contacto() {
       <div className="mx-auto max-w-3xl px-5 text-center">
         <Eyebrow>Reserva tu cita</Eyebrow>
         <h2 className="font-display text-5xl leading-none tracking-wide text-foreground sm:text-6xl">
-          ¿Listo para <span className="text-accent">reservar?</span>
+          ¿Listo para tu <span className="text-accent">próximo corte?</span>
         </h2>
         <p className="mx-auto mt-5 max-w-[44ch] text-sm text-foreground/60 sm:text-base">
-          Agenda tu cita en segundos. Te confirmamos el espacio disponible lo
-          antes posible.
+          Reserva tu cita y dale a tu estilo el acabado que merece.
         </p>
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             href={booking}
             target={isExternal ? "_blank" : undefined}
             rel={isExternal ? "noopener noreferrer" : undefined}
+            onClick={(e) => {
+              if (site.demoMode) {
+                e.preventDefault();
+                setDemoNotice(true);
+              }
+            }}
             className={`${primaryBtn} px-8`}
           >
             <WhatsAppIcon /> {label}
           </a>
         </div>
+        {demoNotice ? (
+          <p role="status" className="mx-auto mt-5 max-w-[44ch] text-xs text-foreground/55">
+            Sitio de demostración: en la versión final este botón abre el chat
+            de WhatsApp del negocio con un mensaje listo para reservar.
+          </p>
+        ) : null}
       </div>
     </section>
   );
@@ -417,11 +441,13 @@ function Footer() {
               Norte Barber <span className="text-accent">Studio</span>
             </p>
             <p className="mt-2 text-sm text-foreground/55">
-              Barbería masculina premium en San Nicolás de los Garza, Nuevo León.
+              Barbería masculina contemporánea.
+              <br />
+              San Nicolás de los Garza, Nuevo León.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
             <div>
               <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.2em] text-foreground/40">
                 Contacto
@@ -434,7 +460,7 @@ function Footer() {
                     rel={wa.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="transition hover:text-accent"
                   >
-                    WhatsApp
+                    WhatsApp: {site.whatsappDisplay}
                   </a>
                 </li>
                 {site.phone ? (
@@ -463,7 +489,7 @@ function Footer() {
                       rel="noopener noreferrer"
                       className="transition hover:text-accent"
                     >
-                      Instagram
+                      Instagram: @{site.instagram}
                     </a>
                   </li>
                 ) : null}
@@ -498,7 +524,7 @@ function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col gap-2 border-t border-white/5 pt-6 text-xs text-foreground/40 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} {site.name}. Todos los derechos reservados.</p>
+          <p>© 2026 {site.name}. Todos los derechos reservados.</p>
           <p>San Nicolás de los Garza, Nuevo León, México.</p>
         </div>
       </div>

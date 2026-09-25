@@ -34,108 +34,61 @@ export const site = {
   state: "Nuevo León",
   country: "México",
 
-  tagline: "Precisión en cada corte",
+  tagline: "Tu estilo. Tu corte.",
   heroSubtitle:
-    "Barbería masculina premium en San Nicolás de los Garza. Cortes y arreglo de barba con atención individual, en un espacio pensado para que salgas impecable.",
+    "Barbería masculina contemporánea en San Nicolás de los Garza.",
+  heroKicker: "Cortes · Barba · Estilo",
 
-  presentation:
-    "Norte Barber Studio es una barbería masculina en San Nicolás de los Garza. Trabajamos cortes y arreglo de barba en un espacio premium, moderno y enfocado en el detalle. Cada visita se toma con tiempo: te recibimos, escuchamos lo que buscas y te damos un acabado limpio y a tu medida.",
+  presentation: [
+    "Norte Barber Studio nace con una idea sencilla: ofrecer un espacio donde un buen corte, una barba bien definida y una atención cuidada formen parte de la misma experiencia.",
+    "Un concepto de barbería contemporánea pensado para quienes buscan verse bien sin complicaciones.",
+  ],
 
   /**
-   * Número de WhatsApp en formato internacional, sin "+" ni espacios.
-   * Ejemplo para Monterrey: "528112345678"
-   * Mientras esté vacío, los botones de WhatsApp apuntan a la sección de
-   * contacto (#reservar) en lugar de abrir un chat roto.
+   * SITIO DE DEMOSTRACIÓN: el número es ficticio. Mientras demoMode sea true,
+   * los botones de WhatsApp no abren un chat real (simulan la interacción).
+   * Para un cliente real: pon demoMode en false y whatsappNumber real (ej. "528112345678").
    */
-  whatsappNumber: "",
+  demoMode: true,
+  whatsappNumber: "528100000000",
+  whatsappDisplay: "+52 81 0000 0000",
 
-  /** Usuario de Instagram sin "@". Vacío = se oculta el enlace. */
-  instagram: "",
-
-  /** URL o usuario de Facebook. Vacío = se oculta el enlace. */
+  instagram: "nortebarberstudio",
   facebook: "",
-
-  /** Teléfono para llamada (formato internacional). Vacío = se oculta. */
   phone: "",
 
-  /** Calle, número y colonia reales. */
-  addressLine: "[Calle, número y colonia]",
+  addressLine: "Av. Universidad 1200, Col. Anáhuac",
   addressCity: "San Nicolás de los Garza, Nuevo León",
-
-  /** Consulta que se usa en el mapa y en el botón "Cómo llegar". */
-  mapQuery: "San Nicolás de los Garza, Nuevo León",
-
-  /** Enlace de reservación externo (Booking/Calendly/etc). Vacío = se usa WhatsApp. */
+  mapQuery: "Av. Universidad, Anáhuac, San Nicolás de los Garza, Nuevo León",
   bookingUrl: "",
 
   schedule: [
-    { day: "Lunes", hours: "[HORARIO]" },
-    { day: "Martes", hours: "[HORARIO]" },
-    { day: "Miércoles", hours: "[HORARIO]" },
-    { day: "Jueves", hours: "[HORARIO]" },
-    { day: "Viernes", hours: "[HORARIO]" },
-    { day: "Sábado", hours: "[HORARIO]" },
-    { day: "Domingo", hours: "[HORARIO]" },
+    { day: "Lunes – Viernes", hours: "10:00 AM – 8:00 PM" },
+    { day: "Sábado", hours: "9:00 AM – 6:00 PM" },
+    { day: "Domingo", hours: "Cerrado" },
   ] satisfies ScheduleItem[],
 
-  /**
-   * Servicios. Reemplaza nombre, descripción, precio y duración con los reales.
-   * Mantén el orden para la cuadrícula de tarjetas.
-   */
   services: [
-    {
-      name: "[Servicio 1]",
-      description: "[Descripción breve del servicio]",
-      price: "$XXX",
-      duration: "XX min",
-    },
-    {
-      name: "[Servicio 2]",
-      description: "[Descripción breve del servicio]",
-      price: "$XXX",
-      duration: "XX min",
-    },
-    {
-      name: "[Servicio 3]",
-      description: "[Descripción breve del servicio]",
-      price: "$XXX",
-      duration: "XX min",
-    },
-    {
-      name: "[Servicio 4]",
-      description: "[Descripción breve del servicio]",
-      price: "$XXX",
-      duration: "XX min",
-    },
+    { name: "Corte clásico", description: "Corte personalizado de acuerdo con tu estilo y tipo de cabello.", price: "$250 MXN", duration: "45 min" },
+    { name: "Corte + barba", description: "Corte de cabello acompañado de perfilado y arreglo de barba.", price: "$350 MXN", duration: "60 min" },
+    { name: "Perfilado de barba", description: "Definición de líneas, contornos y acabado de barba.", price: "$180 MXN", duration: "30 min" },
+    { name: "Corte premium", description: "Corte personalizado, lavado, styling y acabado profesional.", price: "$400 MXN", duration: "75 min" },
+    { name: "Ritual Norte", description: "Corte + barba + lavado + tratamiento de toalla caliente.", price: "$500 MXN", duration: "90 min" },
   ] satisfies Service[],
 
-  /**
-   * Razones para elegir el negocio. Usa únicamente características reales.
-   * Reemplaza los marcadores con diferenciadores concretos del negocio.
-   */
   benefits: [
-    {
-      title: "[Diferenciador 1]",
-      description:
-        "[Describe una razón concreta para elegir Norte Barber Studio — técnica, ambiente o atención.]",
-    },
-    {
-      title: "[Diferenciador 2]",
-      description:
-        "[Describe una razón concreta para elegir Norte Barber Studio.]",
-    },
-    {
-      title: "[Diferenciador 3]",
-      description:
-        "[Describe una razón concreta para elegir Norte Barber Studio.]",
-    },
+    { title: "Corte personalizado", description: "Cada servicio se adapta al estilo que buscas." },
+    { title: "Atención con cita", description: "Agenda tu horario y disfruta tu servicio sin prisas." },
+    { title: "Acabado profesional", description: "Cada corte termina con styling y detalles finales." },
+    { title: "Ambiente premium", description: "Un espacio pensado para relajarte mientras renuevas tu estilo." },
   ] satisfies Benefit[],
 
-  /**
-   * Promoción actual. null = la sección de promoción no se muestra.
-   * Para activarla: { title: "...", description: "..." }
-   */
-  promo: null as null | { title: string; description: string },
+  promo: {
+    eyebrow: "Nuevos clientes",
+    title: "10% de descuento en tu primera visita",
+    cta: "Quiero reservar",
+    note: "Promoción de demostración.",
+  } as null | { eyebrow: string; title: string; cta: string; note: string },
 } as const;
 
 /** Mensaje inicial precargado para el botón de WhatsApp. */
@@ -143,9 +96,9 @@ const whatsappMessage = `Hola, quiero reservar una cita en ${site.name}.`;
 
 /** Enlace de WhatsApp o, si no hay número, ancla a la sección de contacto. */
 export const whatsappLink = (): string =>
-  site.whatsappNumber
+  site.whatsappNumber && !site.demoMode
     ? `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
-    : "#reservar";
+    : "#contacto";
 
 /** Enlace de Instagram normalizado o vacío. */
 export const instagramUrl = (): string =>
