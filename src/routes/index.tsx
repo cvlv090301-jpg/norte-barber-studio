@@ -158,7 +158,7 @@ function Hero() {
         <div className="absolute inset-0 bg-background/20" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-5 pb-14 pt-32">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-5 pb-28 pt-32 sm:pb-16">
         <Eyebrow>San Nicolás de los Garza</Eyebrow>
         <h1 className="gold-text max-w-[14ch] font-display text-6xl leading-[0.86] sm:text-8xl">
           {site.tagline}
