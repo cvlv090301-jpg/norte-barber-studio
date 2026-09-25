@@ -11,7 +11,6 @@ import {
   whatsappLink,
   instagramUrl,
   facebookUrl,
-  directionsUrl,
   mapEmbedUrl,
 } from "../lib/site-data";
 
@@ -332,7 +331,9 @@ function Ubicacion() {
             <iframe
               title={`Mapa de ${site.name}`}
               src={mapEmbedUrl()}
-              className="h-72 w-full lg:h-full"
+              className="pointer-events-none h-72 w-full select-none lg:h-full"
+              tabIndex={-1}
+              aria-hidden="true"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
@@ -362,14 +363,6 @@ function Ubicacion() {
               </ul>
             </div>
 
-            <a
-              href={directionsUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex w-full items-center justify-center rounded-lg border border-white/15 px-6 py-3.5 text-sm font-semibold text-foreground transition hover:bg-white/5"
-            >
-              Cómo llegar
-            </a>
           </div>
         </div>
       </div>
