@@ -59,7 +59,7 @@ export const site = {
 
   addressLine: "Av. Universidad 1200, Col. Anáhuac",
   addressCity: "San Nicolás de los Garza, Nuevo León",
-  mapQuery: "Av. Universidad, Anáhuac, San Nicolás de los Garza, Nuevo León",
+  mapQuery: "San Nicolás de los Garza, Nuevo León",
   bookingUrl: "",
 
   schedule: [
@@ -72,7 +72,6 @@ export const site = {
     { name: "Corte clásico", description: "Corte personalizado de acuerdo con tu estilo y tipo de cabello.", price: "$250 MXN", duration: "45 min" },
     { name: "Corte + barba", description: "Corte de cabello acompañado de perfilado y arreglo de barba.", price: "$350 MXN", duration: "60 min" },
     { name: "Perfilado de barba", description: "Definición de líneas, contornos y acabado de barba.", price: "$180 MXN", duration: "30 min" },
-    { name: "Corte premium", description: "Corte personalizado, lavado, styling y acabado profesional.", price: "$400 MXN", duration: "75 min" },
     { name: "Ritual Norte", description: "Corte + barba + lavado + tratamiento de toalla caliente.", price: "$500 MXN", duration: "90 min" },
   ] satisfies Service[],
 
@@ -87,7 +86,7 @@ export const site = {
     eyebrow: "Nuevos clientes",
     title: "10% de descuento en tu primera visita",
     cta: "Quiero reservar",
-    note: "Promoción de demostración.",
+    note: "",
   } as null | { eyebrow: string; title: string; cta: string; note: string },
 } as const;
 
@@ -113,4 +112,4 @@ export const directionsUrl = (): string =>
 
 /** URL de embed del mapa (sin API key). */
 export const mapEmbedUrl = (): string =>
-  `https://www.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&output=embed`;
+  `https://www.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&z=12&output=embed`;
